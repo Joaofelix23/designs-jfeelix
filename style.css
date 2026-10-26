@@ -246,3 +246,53 @@ footer {
     font-size: 8px;
   }
 }
+
+/* GALERIA DO PROJETO SUBSOLO */
+
+.galeria-subsolo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  width: min(100% - 48px, 1200px);
+  margin: 0 auto 100px;
+}
+
+.galeria-subsolo figure {
+  margin: 0;
+  overflow: hidden;
+  background: #222;
+}
+
+.galeria-subsolo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease;
+}
+
+.galeria-subsolo figure:hover img {
+  transform: scale(1.025);
+}
+
+.galeria-subsolo .imagem-principal {
+  grid-column: 1 / -1;
+}
+
+.galeria-subsolo .imagem-principal img {
+  width: 100%;
+  max-height: 760px;
+  object-fit: contain;
+  background: #111;
+}
+
+@media (max-width: 700px) {
+  .galeria-subsolo {
+    grid-template-columns: 1fr;
+    width: calc(100% - 32px);
+    gap: 12px;
+  }
+
+  .galeria-subsolo .imagem-principal {
+    grid-column: auto;
+  }
+}
