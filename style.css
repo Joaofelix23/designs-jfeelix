@@ -322,3 +322,27 @@ footer {
     max-height: 400px;
   }
 }
+
+/* CORREÇÃO: PRANCHETAS LADO A LADO */
+
+.galeria-subsolo {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  align-items: start;
+}
+
+.galeria-subsolo .imagem-principal {
+  grid-column: 1 / -1 !important;
+}
+
+.galeria-subsolo figure:not(.imagem-principal) {
+  grid-column: auto !important;
+  width: 100%;
+  min-width: 0;
+}
+
+.galeria-subsolo figure:not(.imagem-principal) img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
