@@ -3,73 +3,313 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta name="description" content="Portfólio de design gráfico e direção de arte de João Felix.">
-
   <title>Designs | João Felix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <script>document.documentElement.className += " js";</script>
+  <!-- O visual desta página está todo aqui dentro. O style.css continua existindo para o subsolo.html. -->
+  <style>
+    :root{
+      --terra:#e8582c; --ink:#0f0e0d; --dark:#161412; --dark2:#24201d;
+      --paper:#e5e7e3; --cream:#f0e7d0; --olive:#6d6b25; --peach:#f4c6b2;
+      --f:'Inter Tight','Helvetica Neue',Arial,sans-serif;
+      --ease:cubic-bezier(.16,.84,.24,1);
+      --pad:28px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--f);background:var(--dark);color:var(--paper);-webkit-font-smoothing:antialiased;line-height:1.35;overflow-x:hidden}
+    a{color:inherit}
+    img{display:block;max-width:100%}
+    .sm{font-size:13px;font-weight:700;line-height:1.25;letter-spacing:-.01em;text-transform:uppercase}
+    .xs{font-size:12.5px;line-height:1.4}
+    .big{font-weight:800;text-transform:uppercase;letter-spacing:-.055em;line-height:.84}
 
-  <link rel="stylesheet" href="style.css">
+    /* rolagem suave */
+    html.lenis,html.lenis body{height:auto}
+    .lenis.lenis-smooth{scroll-behavior:auto!important}
+    .lenis.lenis-stopped{overflow:hidden}
+
+    /* barra de progresso */
+    #bar{position:fixed;top:0;left:0;right:0;height:4px;background:#fff;mix-blend-mode:difference;transform:scaleX(0);transform-origin:0 50%;z-index:50;pointer-events:none}
+
+    /* animações de entrada */
+    .js [data-r]{opacity:0;transform:translate3d(0,40px,0);
+      transition:opacity .9s var(--ease) var(--d,0s),transform 1.2s var(--ease) var(--d,0s)}
+    .js [data-r].in{opacity:1;transform:none}
+    .line{display:block;overflow:hidden;padding:.14em 0 .1em;margin:-.14em 0 -.1em}
+    .line>span{display:block}
+    .js .split .line>span{transform:translate3d(0,112%,0);transition:transform 1.25s var(--ease) var(--d,0s)}
+    .js .split.in .line>span{transform:none}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* ---------- TOPO ---------- */
+    .topo{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;padding:22px var(--pad)}
+    .topo a{text-decoration:none}
+    .topo .logo{font-weight:800;font-size:15px;letter-spacing:-.02em}
+    .topo .identificacao{text-align:center;color:#9a928a}
+    .topo .voltar{justify-self:end;border:1.5px solid currentColor;border-radius:99px;padding:8px 14px;transition:background .25s,color .25s}
+    .topo .voltar:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+
+    /* ---------- CAPA (estilo página de case) ---------- */
+    .hero{display:grid;grid-template-columns:1fr 1.1fr;gap:32px;padding:34px var(--pad) 110px;align-items:stretch}
+    .hero-l{display:flex;flex-direction:column;justify-content:space-between;gap:44px}
+    .hero-l .tag{color:var(--terra);margin-bottom:18px}
+    .hero h1{font-size:clamp(70px,13.5vw,230px)}
+    .hero h1 .dot{color:var(--terra)}
+    .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .meta h4{margin-bottom:8px;color:#9a928a}
+    .meta p{font-size:13px;line-height:1.4}
+    .rule{border:0;border-top:1px solid #4a433d;margin:22px 0 18px}
+    .hero .body{font-size:16px;max-width:50ch;color:#cfcac3}
+    .hero-r{position:relative;background:var(--terra);color:var(--ink);border-radius:22px;min-height:460px;overflow:hidden;
+      display:flex;flex-direction:column;justify-content:space-between;padding:22px}
+    .hero-r .mark{position:absolute;left:50%;top:50%;width:min(60%,430px);translate:-50% -50%;animation:spin 60s linear infinite}
+    .hero-r .row{display:flex;justify-content:space-between;position:relative;z-index:2}
+
+    /* ---------- PROJETOS ---------- */
+    .sec{padding:0 var(--pad) 110px}
+    .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;border-top:1px solid #2f2a26;padding-top:34px;margin-bottom:34px}
+    .sec-head h2{font-size:clamp(48px,9vw,150px)}
+    .sec-head .sm{color:#9a928a;padding-bottom:8px}
+    .bento{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+    .tile{grid-column:span var(--s,6);position:relative;overflow:hidden;border-radius:22px;min-height:440px;padding:22px;
+      display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;color:#fff;background:var(--dark2);
+      transition:transform .45s var(--ease)}
+    a.tile:hover{transform:translateY(-6px) rotate(-.3deg)}
+    .tile .media{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;color:#8e867e;padding:30px}
+    .tile .media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+    a.tile:hover .media img{transform:scale(1.05)}
+    .tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),rgba(0,0,0,0) 55%);z-index:1;pointer-events:none}
+    .tile .top,.tile .bot{position:relative;z-index:2}
+    .tile .top{display:flex;justify-content:space-between;align-items:center}
+    .tile h3{font-size:clamp(44px,6.4vw,104px);font-weight:800;text-transform:uppercase;letter-spacing:-.055em;line-height:.82;margin-bottom:12px}
+    .tile .rodape{display:flex;justify-content:space-between;align-items:flex-end;gap:14px}
+    .tile .arrow{font-size:30px;line-height:1;transition:transform .3s}
+    a.tile:hover .arrow{transform:translate(5px,-5px)}
+    .pill{border:1.5px solid currentColor;border-radius:99px;padding:5px 12px;font-size:12px;font-weight:700;text-transform:uppercase}
+    .pill.soon{border-style:dashed;opacity:.7}
+    .tile.vazio{background:var(--olive);cursor:default}
+    .tile.vazio::after{display:none}
+    .tile.vazio h3{opacity:.9}
+
+    /* ---------- RODAPÉ ---------- */
+    footer{background:var(--terra);color:var(--ink);padding:100px var(--pad) 26px}
+    footer h2{font-size:clamp(64px,14vw,230px)}
+    .flinks{display:flex;flex-wrap:wrap;gap:12px 36px;margin-top:44px}
+    .flinks a{text-decoration:none;border-bottom:2px solid var(--ink);padding-bottom:2px}
+    .flinks a:hover{opacity:.6}
+    .outros{margin-top:30px}
+    .outros .sm{margin-bottom:12px;opacity:.7}
+    .fbottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:90px}
+
+    @media(max-width:1000px){
+      .hero{grid-template-columns:1fr}
+      .hero-r{min-height:380px}
+      .tile{grid-column:span 12;min-height:380px}
+    }
+    @media(max-width:640px){
+      :root{--pad:18px}
+      .topo{grid-template-columns:1fr auto}
+      .topo .identificacao{display:none}
+      .hero{padding-bottom:72px}
+      .sec{padding-bottom:72px}
+      .meta{grid-template-columns:repeat(2,1fr)}
+      .tile{min-height:340px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .hero-r .mark{animation:none}
+      a.tile:hover{transform:none}
+      .js [data-r],.js .split .line>span{opacity:1!important;transform:none!important;transition:none!important}
+      #bar{display:none}
+    }
+  </style>
 </head>
 
 <body>
+  <div id="bar" aria-hidden="true"></div>
 
-  <header class="topo">
-    <a href="https://jfeelix-hub.vercel.app" class="logo">
-      JFELIX®
-    </a>
-
-    <span class="identificacao">
-      PORTFÓLIO DE DESIGN
-    </span>
-
-    <a href="https://jfeelix-hub.vercel.app" class="voltar">
-      VOLTAR AO HUB ↗
-    </a>
+  <header class="topo sm">
+    <a href="https://jfeelix-hub.vercel.app" class="logo">JFELIX®</a>
+    <span class="identificacao">PORTFÓLIO DE DESIGN</span>
+    <a href="https://jfeelix-hub.vercel.app" class="voltar">VOLTAR AO HUB ↗</a>
   </header>
 
   <main>
+    <section class="hero">
+      <div class="hero-l">
+        <div>
+          <p class="sm tag" data-r>DIREÇÃO DE ARTE · DESIGN GRÁFICO</p>
+          <h1 class="big split">Designs<span class="dot">.</span></h1>
+        </div>
+        <div data-r style="--d:.15s">
+          <div class="meta">
+            <div><h4 class="sm">Serviços</h4><p>Direção de arte<br>Design gráfico<br>Identidade visual</p></div>
+            <div><h4 class="sm">Área</h4><p>Design<br>Branding</p></div>
+            <div><h4 class="sm">Ano</h4><p>2026</p></div>
+          </div>
+          <hr class="rule">
+          <p class="body">Projetos visuais, experimentações gráficas e identidades criadas para transformar ideias em imagens.</p>
+        </div>
+      </div>
 
-    <section class="introducao">
-      <p class="etiqueta">DIREÇÃO DE ARTE · DESIGN GRÁFICO</p>
-
-      <h1>Designs<span>.</span></h1>
-
-      <p class="descricao">
-        Projetos visuais, experimentações gráficas e identidades
-        criadas para transformar ideias em imagens.
-      </p>
+      <div class="hero-r" data-r style="--d:.1s">
+        <div class="row sm"><span>JFELIX®</span><span>2026</span></div>
+        <svg class="mark" viewBox="0 0 200 200" aria-hidden="true">
+          <g fill="#0f0e0d">
+            <ellipse cx="100" cy="42" rx="15" ry="42"/>
+            <ellipse cx="100" cy="42" rx="15" ry="42" transform="rotate(45 100 100)"/>
+            <ellipse cx="100" cy="42" rx="15" ry="42" transform="rotate(90 100 100)"/>
+            <ellipse cx="100" cy="42" rx="15" ry="42" transform="rotate(135 100 100)"/>
+            <ellipse cx="100" cy="42" rx="15" ry="42" transform="rotate(180 100 100)"/>
+            <ellipse cx="100" cy="42" rx="15" ry="42" transform="rotate(225 100 100)"/>
+            <ellipse cx="100" cy="42" rx="15" ry="42" transform="rotate(270 100 100)"/>
+            <ellipse cx="100" cy="42" rx="15" ry="42" transform="rotate(315 100 100)"/>
+          </g>
+          <circle cx="100" cy="100" r="17" fill="#e8582c"/>
+        </svg>
+        <div class="row sm"><span>Direção de arte</span><span id="qtd">1 projeto</span></div>
+      </div>
     </section>
 
-    <section class="projetos">
+    <section class="sec" id="projetos">
+      <div class="sec-head">
+        <h2 class="big split">Projetos</h2>
+        <span class="sm" data-r>Selecionados</span>
+      </div>
 
-      <a href="subsolo.html" class="projeto projeto-subsolo">
+      <div class="bento">
+        <!--
+          PARA ADICIONAR UM PROJETO NOVO: copie o bloco <a class="tile ..."> inteiro abaixo,
+          cole logo depois dele e troque: o link (href), o número, o nome (h3), a descrição
+          e o endereço da capa (img/nome.jpg). O --s controla a largura (12 = linha inteira).
+        -->
+        <a href="subsolo.html" class="tile projeto projeto-subsolo" style="--s:8" data-r>
+          <div class="media">
+            <span class="sm">Capa do projeto<br><span style="font-weight:400;text-transform:none">salve como img/subsolo.jpg</span></span>
+            <img src="img/subsolo.jpg" alt="Projeto Subsolo" onerror="this.remove()">
+          </div>
+          <div class="top"><span class="sm">01</span><span class="pill">Ver projeto</span></div>
+          <div class="bot">
+            <h3>Subsolo</h3>
+            <div class="rodape">
+              <div class="sm">Direção de arte · Design gráfico</div>
+              <span class="arrow">↗</span>
+            </div>
+          </div>
+        </a>
 
-        <div class="projeto-imagem">
-          <div class="imagem-placeholder">
-            SUBSOLO
+        <div class="tile vazio" style="--s:4" data-r data-d="1">
+          <div class="top"><span class="sm">02</span><span class="pill soon">Em breve</span></div>
+          <div class="bot">
+            <h3>Novo<br>projeto</h3>
+            <div class="sm">Mais trabalhos a caminho</div>
           </div>
         </div>
-
-        <div class="projeto-informacoes">
-          <div>
-            <h2>SUBSOLO</h2>
-            <p>Direção de arte · Design gráfico</p>
-          </div>
-
-          <span class="seta">↗</span>
-        </div>
-
-      </a>
-
+      </div>
     </section>
-
   </main>
 
   <footer>
-    <span>JOÃO FELIX®</span>
-    <span>DESIGN · DIREÇÃO DE ARTE</span>
-    <span>2026</span>
+    <h2 class="big split">Bora criar<br>junto?</h2>
+    <div class="flinks sm" data-r style="--d:.2s">
+      <a href="mailto:Joao.vframalho@senacsp.edu.br">E-mail</a>
+      <a href="https://instagram.com/jfeelix_">Instagram</a>
+      <a href="https://wa.me/5515998057042">WhatsApp</a>
+      <a href="https://jfeelix-hub.vercel.app">Voltar ao hub ↗</a>
+    </div>
+    <div class="outros" id="outros" hidden>
+      <p class="sm">Outros portfólios</p>
+      <div class="flinks sm" id="outros-links" style="margin-top:0"></div>
+    </div>
+    <div class="fbottom sm">
+      <span>JOÃO FELIX®</span>
+      <span>DESIGN · DIREÇÃO DE ARTE</span>
+      <span>2026</span>
+    </div>
   </footer>
 
+  <!-- rolagem suave: se não carregar, a página funciona do mesmo jeito -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <!-- lista de portfólios do hub (para o rodapé "Outros portfólios") -->
+  <script src="https://jfeelix-hub.vercel.app/portfolios.js"></script>
+  <script>
+  (function () {
+    var root = document.documentElement;
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* contagem de projetos */
+    var n = document.querySelectorAll(".projeto").length;
+    document.getElementById("qtd").textContent = n + (n === 1 ? " projeto" : " projetos");
+
+    /* escalonar blocos */
+    document.querySelectorAll(".tile[data-r]").forEach(function (t, i) { t.style.setProperty("--d", (i * 0.1).toFixed(1) + "s"); });
+
+    /* outros portfólios, a partir do portfolios.js do hub */
+    var lista = (window.PORTFOLIOS || []).filter(function (p) { return p.status === "no-ar" && p.id !== "designs"; });
+    if (lista.length) {
+      document.getElementById("outros-links").innerHTML = lista.map(function (p) {
+        return '<a href="' + p.url + '">' + p.titulo + ' ↗</a>';
+      }).join("");
+      document.getElementById("outros").hidden = false;
+    }
+
+    /* títulos: cada linha sobe de dentro de uma máscara */
+    document.querySelectorAll(".split").forEach(function (el) {
+      var rotulo = el.innerHTML.replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, "");
+      var linhas = el.innerHTML.split(/<br\s*\/?>/i);
+      el.setAttribute("aria-label", rotulo);
+      el.innerHTML = linhas.map(function (l, i) {
+        return '<span class="line" aria-hidden="true"><span style="--d:' + (i * 0.1).toFixed(1) + 's">' + l.trim() + "</span></span>";
+      }).join("");
+    });
+
+    /* revelar ao rolar */
+    var alvos = document.querySelectorAll("[data-r],.split");
+    if (reduce || !("IntersectionObserver" in window)) {
+      alvos.forEach(function (a) { a.classList.add("in"); });
+    } else {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var el = e.target;
+          el.classList.add("in");
+          io.unobserve(el);
+          if (el.hasAttribute("data-r")) {
+            var d = parseFloat(getComputedStyle(el).getPropertyValue("--d")) || 0;
+            setTimeout(function () {
+              el.removeAttribute("data-r");
+              el.classList.remove("in");
+              el.style.removeProperty("--d");
+            }, (d + 1.4) * 1000);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: "0px" });
+      alvos.forEach(function (a) { io.observe(a); });
+    }
+
+    if (reduce) return;
+
+    /* rolagem suave + barra de progresso */
+    var lenis = null;
+    if (window.Lenis) {
+      try {
+        lenis = new Lenis({ duration: 1.2, easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); }, smoothWheel: true });
+      } catch (err) { lenis = null; }
+    }
+    var bar = document.getElementById("bar");
+    function quadro(agora) {
+      if (lenis) lenis.raf(agora);
+      var y = lenis ? lenis.scroll : (window.pageYOffset || 0);
+      var total = root.scrollHeight - window.innerHeight;
+      bar.style.transform = "scaleX(" + (total > 0 ? Math.min(y / total, 1) : 0) + ")";
+      requestAnimationFrame(quadro);
+    }
+    requestAnimationFrame(quadro);
+  })();
+  </script>
 </body>
 </html>
