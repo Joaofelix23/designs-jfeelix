@@ -14,7 +14,7 @@
       display: none !important;
     }
 
-    /* TEMA BRANCO COM FONTE BRANCA */
+    /* TEMA BRANCO COM DETALHES EM CREME E TEXTO DO RODAPÉ AJUSTADO */
     :root {
       --terra: #360b13;
       --cream: #fefdd7;
@@ -22,8 +22,8 @@
       --pedra: #e6d9d4;
       --marrom: #3b1f1b;
 
-      --ink: #ffffff; /* Fonte principal em branco */
-      --paper: #ffffff; /* Fundo principal branco */
+      --ink: #ffffff; 
+      --paper: #ffffff; 
       --card-bg: #161412;
 
       --f: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
@@ -145,16 +145,16 @@
 
     .pill { border: 1.5px solid currentColor; border-radius: 99px; padding: 5px 12px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
 
-    /* ---------- RODAPÉ ---------- */
-    footer { background: var(--terra); color: var(--cream); padding: 100px var(--pad) 26px; }
-    footer h2 { font-size: clamp(64px, 14vw, 230px); }
+    /* ---------- RODAPÉ (COM COR DO TÍTULO ALTERADA PARA PRETO) ---------- */
+    footer { background: var(--cream); color: #161412; padding: 100px var(--pad) 26px; }
+    footer h2 { font-size: clamp(64px, 14vw, 230px); color: #161412; }
     .flinks { display: flex; flex-wrap: wrap; gap: 12px 36px; margin-top: 44px; }
     .flinks a { text-decoration: none; border-bottom: 2px solid currentColor; padding-bottom: 2px; display: inline-flex; align-items: center; gap: 6px; }
     .flinks a:hover { opacity: .6; }
     .flinks a svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
     .outros { margin-top: 30px; }
     .outros .sm { margin-bottom: 12px; opacity: .7; }
-    .fbottom { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 90px; }
+    .fbottom { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 90px; border-top: 1px solid rgba(22, 20, 18, 0.15); padding-top: 24px; }
 
     @media(max-width:1000px){
       .tile { grid-column: span 12; min-height: 420px; }
