@@ -87,19 +87,7 @@
       overflow: hidden;
     }
 
-    /* Barra de progresso */
-    #bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: #fff;
-      mix-blend-mode: difference;
-      transform: scaleX(0);
-      transform-origin: 0 50%;
-      z-index: 50;
-      pointer-events: none;
+    
     }
 
     /* Animações de entrada */
@@ -586,24 +574,7 @@
         }
       }
 
-      var bar = document.getElementById("bar");
-
-      function quadro(agora) {
-        if (lenis) {
-          lenis.raf(agora);
-        }
-
-        var y = lenis ? lenis.scroll : (window.pageYOffset || 0);
-        var total = root.scrollHeight - window.innerHeight;
-
-        bar.style.transform = "scaleX(" +
-          (total > 0 ? Math.min(y / total, 1) : 0) +
-          ")";
-
-        requestAnimationFrame(quadro);
-      }
-
-      requestAnimationFrame(quadro);
+      
     })();
   </script>
 </body>
