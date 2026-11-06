@@ -10,7 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&display=swap" rel="stylesheet">
   <script>document.documentElement.className += " js";</script>
   <style>
-    /* Remove numeração dos cards se houver classe residual */
     .card-num, .card-number, .num, [class*="num"] {
       display: none !important;
     }
@@ -68,7 +67,7 @@
     .topo .voltar:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
     .topo .voltar svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
 
-    /* ---------- CAPA (SEM A CAPA FLUTUANTE) ---------- */
+    /* ---------- CAPA ---------- */
     .hero { max-width: 1200px; margin: 0 auto; padding: 34px var(--pad) 80px; }
     .hero-l { display: flex; flex-direction: column; gap: 40px; }
     .hero-l .tag { color: var(--cream); opacity: 0.8; margin-bottom: 12px; }
@@ -80,20 +79,20 @@
     .rule { border: 0; border-top: 1px solid #4a433d; margin: 22px 0 18px; max-width: 700px; }
     .hero .body { font-size: 16px; max-width: 50ch; color: #cfcac3; }
 
-    /* ---------- PROJETOS ---------- */
+    /* ---------- PROJETOS (PADRONIZADOS) ---------- */
     .sec { padding: 0 var(--pad) 110px; }
     .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; border-top: 1px solid #2f2a26; padding-top: 34px; margin-bottom: 34px; }
     .sec-head h2 { font-size: clamp(48px, 9vw, 150px); }
     .sec-head .sm { color: #9a928a; padding-bottom: 8px; }
-    .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; max-width: 1400px; margin: 0 auto; }
+    .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; max-width: 1400px; margin: 0 auto; }
     
     .tile { 
       grid-column: span var(--s, 6); 
       position: relative; 
       overflow: hidden; 
       border-radius: 22px; 
-      min-height: 440px; 
-      padding: 22px;
+      min-height: 500px; /* Altura padronizada para todos os cards */
+      padding: 30px;
       display: flex; 
       flex-direction: column; 
       justify-content: space-between; 
@@ -103,14 +102,30 @@
       transition: transform .45s var(--ease); 
     }
     a.tile:hover { transform: translateY(-6px) rotate(-.3deg); }
-    .tile .media { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; color: #8e867e; padding: 30px; }
-    .tile .media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+    
+    .tile .media { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 0; }
+    .tile .media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
     a.tile:hover .media img { transform: scale(1.05); }
-    .tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0) 55%); z-index: 1; pointer-events: none; }
+    
+    /* Gradiente escuro uniforme para legibilidade impecável */
+    .tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2) 100%); z-index: 1; pointer-events: none; }
+    
     .tile .top, .tile .bot { position: relative; z-index: 2; }
     .tile .top { display: flex; justify-content: flex-end; align-items: center; }
-    .tile h3 { font-size: clamp(44px, 6.4vw, 104px); font-weight: 800; text-transform: uppercase; letter-spacing: -.055em; line-height: .82; margin-bottom: 12px; }
-    .tile .rodape { display: flex; justify-content: space-between; align-items: flex-end; gap: 14px; }
+    
+    .tile h3 { font-size: clamp(38px, 5vw, 76px); font-weight: 800; text-transform: uppercase; letter-spacing: -.055em; line-height: .9; margin-bottom: 8px; }
+    
+    /* Descrição curta do projeto */
+    .tile .desc-curta {
+      font-size: 14px;
+      line-height: 1.45;
+      color: #e2ded9;
+      max-width: 38ch;
+      margin-bottom: 18px;
+      opacity: 0.9;
+    }
+
+    .tile .rodape { display: flex; justify-content: space-between; align-items: flex-end; gap: 14px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 14px; }
     
     .tile .arrow {
       display: inline-flex;
@@ -146,7 +161,7 @@
     .fbottom { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 90px; }
 
     @media(max-width:1000px){
-      .tile { grid-column: span 12; min-height: 380px; }
+      .tile { grid-column: span 12; min-height: 420px; }
     }
     @media(max-width:640px){
       :root { --pad: 18px; }
@@ -155,7 +170,7 @@
       .hero { padding-bottom: 60px; }
       .sec { padding-bottom: 72px; }
       .meta { grid-template-columns: repeat(2, 1fr); }
-      .tile { min-height: 340px; }
+      .tile { min-height: 380px; padding: 22px; }
     }
     @media(prefers-reduced-motion:reduce){
       html { scroll-behavior: auto; }
@@ -205,13 +220,14 @@
 
       <div class="bento">
         <!-- Projeto 1: Subsolo -->
-        <a href="subsolo.html" class="tile projeto" style="--s:8" data-r>
+        <a href="subsolo.html" class="tile projeto" style="--s:6" data-r>
           <div class="media">
             <img src="assets/subsolo/Capasubsolo.png" alt="Projeto Subsolo" onerror="this.remove()">
           </div>
           <div class="top"><span class="pill">Ver projeto</span></div>
           <div class="bot">
             <h3>Subsolo</h3>
+            <p class="desc-curta">Identidade visual e direção de arte para projeto independente, explorando estética industrial e contrastes profundos.</p>
             <div class="rodape">
               <div class="sm">Direção de arte · Design gráfico</div>
               <span class="arrow">
@@ -222,13 +238,14 @@
         </a>
 
         <!-- Projeto 2: Brinca Muito -->
-        <a href="brincamuito.html" class="tile projeto" style="--s:4" data-r>
+        <a href="brincamuito.html" class="tile projeto" style="--s:6" data-r>
           <div class="media">
             <img src="assets/brincamuito/Brinca1.png" alt="Projeto Brinca Muito" onerror="this.remove()">
           </div>
           <div class="top"><span class="pill">Ver projeto</span></div>
           <div class="bot">
             <h3>Brinca Muito</h3>
+            <p class="desc-curta">Direção de arte e branding para evento cultural, unindo a força da cultura de rua e monumentos da arquitetura nacional.</p>
             <div class="rodape">
               <div class="sm">Direção de arte · Branding</div>
               <span class="arrow">
@@ -270,14 +287,11 @@
     var root = document.documentElement;
     var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* Contagem de projetos dinâmica */
     var n = document.querySelectorAll(".projeto").length;
     document.getElementById("qtd").textContent = n + (n === 1 ? " projeto" : " projetos");
 
-    /* Escalonar blocos */
     document.querySelectorAll(".tile[data-r]").forEach(function (t, i) { t.style.setProperty("--d", (i * 0.1).toFixed(1) + "s"); });
 
-    /* Outros portfólios (do portfolios.js do hub) */
     var lista = (window.PORTFOLIOS || []).filter(function (p) { return p.status === "no-ar" && p.id !== "designs"; });
     if (lista.length) {
       document.getElementById("outros-links").innerHTML = lista.map(function (p) {
@@ -286,7 +300,6 @@
       document.getElementById("outros").hidden = false;
     }
 
-    /* Títulos divididos em linhas animadas */
     document.querySelectorAll(".split").forEach(function (el) {
       var rotulo = el.innerHTML.replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, "");
       var linhas = el.innerHTML.split(/<br\s*\/?>/i);
@@ -296,7 +309,6 @@
       }).join("");
     });
 
-    /* Revelar ao rolar */
     var alvos = document.querySelectorAll("[data-r],.split");
     if (reduce || !("IntersectionObserver" in window)) {
       alvos.forEach(function (a) { a.classList.add("in"); });
@@ -322,7 +334,6 @@
 
     if (reduce) return;
 
-    /* Rolagem suave + barra de progresso */
     var lenis = null;
     if (window.Lenis) {
       try {
