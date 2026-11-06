@@ -59,26 +59,6 @@
     .js .split .line > span { transform: translate3d(0, 112%, 0); transition: transform 1.25s var(--ease) var(--d, 0s); }
     .js .split.in .line > span { transform: none; }
 
-    /* Animação de pulsação do Girassol */
-    @keyframes pulsar {
-      0% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 0px rgba(254, 253, 215, 0));
-      }
-      50% {
-        transform: scale(1.06);
-        filter: drop-shadow(0 0 18px rgba(254, 253, 215, 0.4));
-      }
-      100% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 0px rgba(254, 253, 215, 0));
-      }
-    }
-    .pulsing-star {
-      animation: pulsar 4s ease-in-out infinite;
-      transform-origin: center;
-    }
-
     /* ---------- TOPO ---------- */
     .topo { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center; padding: 22px var(--pad); }
     .topo a { text-decoration: none; }
@@ -88,46 +68,24 @@
     .topo .voltar:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
     .topo .voltar svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
 
-    /* ---------- CAPA ---------- */
-    .hero { display: grid; grid-template-columns: 1fr 1.1fr; gap: 32px; padding: 34px var(--pad) 110px; align-items: stretch; }
-    .hero-l { display: flex; flex-direction: column; justify-content: space-between; gap: 44px; }
-    .hero-l .tag { color: var(--cream); opacity: 0.8; margin-bottom: 18px; }
-    .hero h1 { font-size: clamp(70px, 13.5vw, 230px); }
+    /* ---------- CAPA (SEM A CAPA FLUTUANTE) ---------- */
+    .hero { max-width: 1200px; margin: 0 auto; padding: 34px var(--pad) 80px; }
+    .hero-l { display: flex; flex-direction: column; gap: 40px; }
+    .hero-l .tag { color: var(--cream); opacity: 0.8; margin-bottom: 12px; }
+    .hero h1 { font-size: clamp(60px, 12vw, 160px); }
     .hero h1 .dot { color: var(--cream); }
-    .meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 700px; }
     .meta h4 { margin-bottom: 8px; color: #9a928a; }
     .meta p { font-size: 13px; line-height: 1.4; }
-    .rule { border: 0; border-top: 1px solid #4a433d; margin: 22px 0 18px; }
+    .rule { border: 0; border-top: 1px solid #4a433d; margin: 22px 0 18px; max-width: 700px; }
     .hero .body { font-size: 16px; max-width: 50ch; color: #cfcac3; }
-    
-    .hero-r { 
-      position: relative; 
-      background: var(--terra); 
-      color: var(--cream); 
-      border-radius: 22px; 
-      min-height: 460px; 
-      overflow: hidden;
-      display: flex; 
-      flex-direction: column; 
-      justify-content: space-between; 
-      padding: 26px; 
-    }
-    .hero-r .mark-center {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      width: 100%;
-    }
-    .hero-r .row { display: flex; justify-content: space-between; position: relative; z-index: 2; }
 
     /* ---------- PROJETOS ---------- */
     .sec { padding: 0 var(--pad) 110px; }
     .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; border-top: 1px solid #2f2a26; padding-top: 34px; margin-bottom: 34px; }
     .sec-head h2 { font-size: clamp(48px, 9vw, 150px); }
     .sec-head .sm { color: #9a928a; padding-bottom: 8px; }
-    .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; max-width: 1400px; margin: 0 auto; }
     
     .tile { 
       grid-column: span var(--s, 6); 
@@ -175,10 +133,6 @@
     a.tile:hover .arrow { transform: translate(5px, -5px); }
 
     .pill { border: 1.5px solid currentColor; border-radius: 99px; padding: 5px 12px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
-    .pill.soon { border-style: dashed; opacity: .7; }
-    .tile.vazio { background: #8a4c2b; color: var(--cream); cursor: default; }
-    .tile.vazio::after { display: none; }
-    .tile.vazio h3 { opacity: .9; }
 
     /* ---------- RODAPÉ ---------- */
     footer { background: var(--terra); color: var(--cream); padding: 100px var(--pad) 26px; }
@@ -192,22 +146,19 @@
     .fbottom { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 90px; }
 
     @media(max-width:1000px){
-      .hero { grid-template-columns: 1fr; }
-      .hero-r { min-height: 380px; }
       .tile { grid-column: span 12; min-height: 380px; }
     }
     @media(max-width:640px){
       :root { --pad: 18px; }
       .topo { grid-template-columns: 1fr auto; }
       .topo .identificacao { display: none; }
-      .hero { padding-bottom: 72px; }
+      .hero { padding-bottom: 60px; }
       .sec { padding-bottom: 72px; }
       .meta { grid-template-columns: repeat(2, 1fr); }
       .tile { min-height: 340px; }
     }
     @media(prefers-reduced-motion:reduce){
       html { scroll-behavior: auto; }
-      .pulsing-star { animation: none; }
       a.tile:hover { transform: none; }
       .js [data-r], .js .split .line > span { opacity: 1 !important; transform: none !important; transition: none !important; }
       #bar { display: none; }
@@ -244,80 +195,51 @@
           <p class="body">Projetos visuais, experimentações gráficas e identidades criadas para transformar ideias em imagens.</p>
         </div>
       </div>
-
-      <div class="hero-r" data-r style="--d:.1s">
-        <div class="row sm"><span>JFELIX®</span><span>2026</span></div>
-        
-        <!-- Elemento central: Girassol vetorial pulsante + Selo tipográfico -->
-        <div class="mark-center">
-          <svg class="pulsing-star" viewBox="0 0 200 200" aria-hidden="true" style="width: min(45vw, 220px); height: auto; display: block; margin: 0 auto;">
-            <g fill="#fefdd7">
-              <ellipse cx="100" cy="40" rx="14" ry="36"/>
-              <ellipse cx="100" cy="40" rx="14" ry="36" transform="rotate(30 100 100)"/>
-              <ellipse cx="100" cy="40" rx="14" ry="36" transform="rotate(60 100 100)"/>
-              <ellipse cx="100" cy="40" rx="14" ry="36" transform="rotate(90 100 100)"/>
-              <ellipse cx="100" cy="40" rx="14" ry="36" transform="rotate(120 100 100)"/>
-              <ellipse cx="100" cy="40" rx="14" ry="36" transform="rotate(150 100 100)"/>
-              <ellipse cx="100" cy="40" rx="14" ry="36" transform="rotate(180 100 100)"/>
-              <ellipse cx="100" cy="40" rx="14" ry="36" transform="rotate(210 100 100)"/>
-              <ellipse cx="100" cy="40" rx="14" ry="36" transform="rotate(240 100 100)"/>
-              <ellipse cx="100" cy="40" rx="14" ry="36" transform="rotate(270 100 100)"/>
-              <ellipse cx="100" cy="40" rx="14" ry="36" transform="rotate(300 100 100)"/>
-              <ellipse cx="100" cy="40" rx="14" ry="36" transform="rotate(330 100 100)"/>
-            </g>
-            <circle cx="100" cy="100" r="28" fill="#360b13"/>
-            <circle cx="100" cy="100" r="22" fill="none" stroke="#fefdd7" stroke-width="2" stroke-dasharray="3 4" opacity="0.6"/>
-            <circle cx="100" cy="100" r="8" fill="#fefdd7"/>
-          </svg>
-          <div style="font-family: var(--f); font-size: 10px; font-weight: 700; letter-spacing: 0.22em; color: #fefdd7; margin-top: 14px; text-transform: uppercase; opacity: 0.85;">
-            JFELIX® · CREATIVE DIRECTION · 2026
-          </div>
-        </div>
-
-        <div class="row sm"><span>Direção de arte</span><span id="qtd">1 projeto</span></div>
-      </div>
     </section>
 
     <section class="sec" id="projetos">
       <div class="sec-head">
         <h2 class="big split">Projetos</h2>
-        <span class="sm" data-r>Selecionados</span>
+        <span class="sm" data-r><span id="qtd">2 projetos</span> selecionados</span>
       </div>
 
       <div class="bento">
-  <!-- Projeto 1: Subsolo -->
-  <a href="subsolo.html" class="tile projeto projeto-subsolo" style="--s:8" data-r>
-    <div class="media">
-      <img src="assets/subsolo/Capasubsolo.png" alt="Projeto Subsolo" onerror="this.remove()">
-    </div>
-    <div class="top"><span class="pill">Ver projeto</span></div>
-    <div class="bot">
-      <h3>Subsolo</h3>
-      <div class="rodape">
-        <div class="sm">Direção de arte · Design gráfico</div>
-        <span class="arrow">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-        </span>
-      </div>
-    </div>
-  </a>
+        <!-- Projeto 1: Subsolo -->
+        <a href="subsolo.html" class="tile projeto" style="--s:8" data-r>
+          <div class="media">
+            <img src="assets/subsolo/Capasubsolo.png" alt="Projeto Subsolo" onerror="this.remove()">
+          </div>
+          <div class="top"><span class="pill">Ver projeto</span></div>
+          <div class="bot">
+            <h3>Subsolo</h3>
+            <div class="rodape">
+              <div class="sm">Direção de arte · Design gráfico</div>
+              <span class="arrow">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
 
-  <!-- Projeto 2: Brinca Muito -->
-  <a href="brincamuito.html" class="tile projeto" style="--s:4" data-r>
-  <div class="media">
-    <img src="assets/brincamuito/Brinca1.png" alt="Projeto Brinca Muito" onerror="this.remove()">
-  </div>
-  <div class="top"><span class="pill">Ver projeto</span></div>
-  <div class="bot">
-    <h3>Brinca Muito</h3>
-    <div class="rodape">
-      <div class="sm">Direção de arte · Branding</div>
-      <span class="arrow">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-      </span>
-    </div>
-  </div>
-</a>
+        <!-- Projeto 2: Brinca Muito -->
+        <a href="brincamuito.html" class="tile projeto" style="--s:4" data-r>
+          <div class="media">
+            <img src="assets/brincamuito/Brinca1.png" alt="Projeto Brinca Muito" onerror="this.remove()">
+          </div>
+          <div class="top"><span class="pill">Ver projeto</span></div>
+          <div class="bot">
+            <h3>Brinca Muito</h3>
+            <div class="rodape">
+              <div class="sm">Direção de arte · Branding</div>
+              <span class="arrow">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <h2 class="big split">Bora criar<br>junto?</h2>
@@ -348,7 +270,7 @@
     var root = document.documentElement;
     var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* Contagem de projetos */
+    /* Contagem de projetos dinâmica */
     var n = document.querySelectorAll(".projeto").length;
     document.getElementById("qtd").textContent = n + (n === 1 ? " projeto" : " projetos");
 
