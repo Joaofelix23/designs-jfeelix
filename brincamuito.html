@@ -18,11 +18,11 @@
     :root {
       --terra: #e8582c;
       --ink: #0f0e0d;
-      --dark: #161412;
-      --dark2: #24201d;
-      --paper: #e5e7e3;
-      --olive: #6d6b25;
-      --peach: #f4c6b2;
+      /* Fundo alterado para um creme elegante e sofisticado */
+      --dark: #f4f1ea;
+      --dark2: #e8e3d5;
+      /* Texto ajustado para escuro para contrastar perfeitamente com o creme */
+      --paper: #1c1a18;
       --f: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
       --ease: cubic-bezier(.16,.84,.24,1);
       --pad: 28px;
@@ -79,8 +79,8 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: #fff;
-      mix-blend-mode: difference;
+      background: var(--terra);
+      mix-blend-mode: normal;
       transform: scaleX(0);
       transform-origin: 0 50%;
       z-index: 50;
@@ -140,7 +140,7 @@
 
     .topo .identificacao {
       text-align: center;
-      color: #9a928a;
+      color: #6b635b;
     }
 
     .topo .voltar {
@@ -153,7 +153,7 @@
 
     .topo .voltar:hover {
       background: var(--paper);
-      color: var(--ink);
+      color: var(--dark);
       border-color: var(--paper);
     }
 
@@ -192,7 +192,7 @@
 
     .meta h4 {
       margin-bottom: 8px;
-      color: #9a928a;
+      color: #6b635b;
     }
 
     .meta p {
@@ -202,22 +202,23 @@
 
     .rule {
       border: 0;
-      border-top: 1px solid #4a433d;
+      border-top: 1px solid #d0c8b8;
       margin: 20px 0 16px;
     }
 
     .hero .body {
       font-size: 16px;
       max-width: 46ch;
-      color: #cfcac3;
+      color: #4a433d;
     }
 
     .capa {
       border-radius: 22px;
       overflow: hidden;
-      background: #111;
+      background: #e5dfd3;
       justify-self: end;
       width: min(100%, var(--largura-capa));
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
 
     .capa img {
@@ -248,6 +249,7 @@
       border-radius: 22px;
       overflow: hidden;
       background: var(--dark2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
 
     .galeria .moldura img {
@@ -265,7 +267,7 @@
       justify-content: space-between;
       gap: 16px;
       padding: 12px 4px 0;
-      color: #9a928a;
+      color: #6b635b;
     }
 
     footer {
