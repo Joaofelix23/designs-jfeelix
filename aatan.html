@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AATAN — Direção de Arte & Social Media | J. Felix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Paleta inspirada no Brinca Muito + Fundo Claro Solicitado */
+      --bg-light: #F4F3EF;
+      --bg-surface: #EAE8E1;
+      --ink-dark: #111111;
+      --ink-muted: #555555;
+      --accent-blue: #232896;   /* Azul cobalto Brinca Muito */
+      --accent-yellow: #C5B318; /* Amarelo mostarda/ouro Brinca Muito */
+      --border-subtle: rgba(17, 17, 17, 0.14);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      color: var(--ink-dark);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Barra superior estilo portfólio */
+    header {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 28px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--ink-dark);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border: 1px solid var(--ink-dark);
+      border-radius: 999px;
+      transition: all 0.25s ease;
+    }
+
+    .back-link:hover {
+      background-color: var(--accent-blue);
+      border-color: var(--accent-blue);
+      color: #FFFFFF;
+    }
+
+    .project-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    /* Hero / Cabeçalho do Projeto */
+    .hero {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 64px 32px 48px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      background-color: var(--accent-blue);
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 4px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.92;
+      text-transform: uppercase;
+      color: var(--ink-dark);
+      margin-bottom: 28px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 48px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .hero-description {
+      font-size: 1.15rem;
+      color: var(--ink-dark);
+      max-width: 640px;
+      line-height: 1.6;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .meta-item span {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-blue);
+      margin-bottom: 4px;
+    }
+
+    .meta-item p {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink-dark);
+    }
+
+    /* Galeria Uniforme com Legenda Lateral Direita */
+    .gallery-section {
+      max-width: 1320px;
+      margin: 24px auto 96px;
+      padding: 0 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .showcase-row {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .showcase-row:last-child {
+      border-bottom: none;
+    }
+
+    /* Container uniforme da arte (proporção fixa 4:5 ou 1:1 para manter todas idênticas) */
+    .art-frame {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background-color: var(--bg-surface);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .art-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .showcase-row:hover .art-frame img {
+      transform: scale(1.02);
+    }
+
+    /* Placeholder visual caso ainda não tenha inserido a imagem */
+    .placeholder-art {
+      text-align: center;
+      padding: 24px;
+      color: var(--ink-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* Coluna da Legenda à Direita */
+    .art-caption {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-right: 16px;
+    }
+
+    .caption-index {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-blue);
+      margin-bottom: 12px;
+    }
+
+    .caption-index::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--accent-yellow);
+    }
+
+    .art-caption h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      color: var(--ink-dark);
+    }
+
+    .art-caption p {
+      font-size: 0.98rem;
+      color: var(--ink-muted);
+      line-height: 1.65;
+    }
+
+    /* Rodapé */
+    footer {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 36px 32px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-muted);
+    }
+
+    footer a {
+      color: var(--ink-dark);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--accent-blue);
+    }
+
+    /* Responsividade */
+    @media (max-width: 900px) {
+      .hero-grid,
+      .showcase-row {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .art-caption {
+        padding-right: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="back-link">← Voltar para Projetos</a>
+    <span class="project-tag">Direção de Arte • Social Media</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="hero-eyebrow">Projeto Voluntário & Social</span>
+      <h1>AATAN</h1>
+      <div class="hero-grid">
+        <p class="hero-description">
+          Criação de peças gráficas e identidade visual para as redes sociais da AATAN (Associação Abrigo Temporário de Animais Necessitados), com foco em campanhas de adoção responsável, engajamento comunitário e conscientização no Instagram.
+        </p>
+        <div class="hero-meta">
+          <div class="meta-item">
+            <span>Cliente</span>
+            <p>AATAN Sorocaba</p>
+          </div>
+          <div class="meta-item">
+            <span>Escopo</span>
+            <p>Design para Instagram & Campanhas</p>
+          </div>
+          <div class="meta-item">
+            <span>Objetivo</span>
+            <p>Adoção Responsável</p>
+          </div>
+          <div class="meta-item">
+            <span>Formato</span>
+            <p>Feed, Carrosséis & Stories</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section">
+      <!-- Item 01 -->
+      <article class="showcase-row">
+        <div class="art-frame">
+          <!-- Substitua o src pelo caminho da sua imagem -->
+          <img src="assets/aatan-01.jpg" alt="Arte de Adoção AATAN 01" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <div class="placeholder-art" style="display:none;">[Insira aqui a Arte 01 — ex: assets/aatan-01.jpg]</div>
+        </div>
+        <div class="art-caption">
+          <span class="caption-index">01 — Campanha de Adoção</span>
+          <h2>Destaque Individual para Adoção</h2>
+          <p>
+            Layout desenvolvido para apresentar o perfil de cada animal disponível, destacando personalidade, porte e história de forma acolhedora para gerar conexão imediata no feed do Instagram.
+          </p>
+        </div>
+      </article>
+
+      <!-- Item 02 -->
+      <article class="showcase-row">
+        <div class="art-frame">
+          <img src="assets/aatan-02.jpg" alt="Arte de Adoção AATAN 02" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <div class="placeholder-art" style="display:none;">[Insira aqui a Arte 02 — ex: assets/aatan-02.jpg]</div>
+        </div>
+        <div class="art-caption">
+          <span class="caption-index">02 — Feira & Eventos</span>
+          <h2>Divulgação de Feiras de Adoção</h2>
+          <p>
+            Peças informativas com hierarquia tipográfica clara para facilitar a leitura rápida de datas, locais e requisitos necessários para adotar um pet presencialmente.
+          </p>
+        </div>
+      </article>
+
+      <!-- Item 03 -->
+      <article class="showcase-row">
+        <div class="art-frame">
+          <img src="assets/aatan-03.jpg" alt="Arte de Adoção AATAN 03" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <div class="placeholder-art" style="display:none;">[Insira aqui a Arte 03 — ex: assets/aatan-03.jpg]</div>
+        </div>
+        <div class="art-caption">
+          <span class="caption-index">03 — Conscientização</span>
+          <h2>Carrossel Educativo & Cuidados</h2>
+          <p>
+            Série de posts pensados para educar seguidores sobre posse responsável, vacinação e adaptação de animais resgatados em novos lares.
+          </p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 — Portfólio</span>
+    <a href="index.html">Ver todos os projetos ↗</a>
+  </footer>
+
+</body>
+</html>
