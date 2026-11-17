@@ -200,6 +200,105 @@
       font-weight: 500;
     }
 
+
+    /* ---------- CARROSSEL (ITEM 03) ---------- */
+    .carousel-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      scroll-snap-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--ink-dark);
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      transition: all 0.2s ease;
+      z-index: 5;
+    }
+
+    .carousel-btn:hover {
+      background: var(--accent-blue);
+      color: #FFFFFF;
+      border-color: var(--accent-blue);
+    }
+
+    .carousel-btn.prev { left: 12px; }
+    .carousel-btn.next { right: 12px; }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      padding: 6px 10px;
+      background: rgba(17, 17, 17, 0.55);
+      backdrop-filter: blur(4px);
+      border-radius: 999px;
+      z-index: 5;
+    }
+
+    .carousel-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.45);
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.25s ease;
+    }
+
+    .carousel-dot.active {
+      background: var(--accent-yellow);
+      transform: scale(1.25);
+    }
+
     /* Coluna da Legenda à Direita */
     .art-caption {
       display: flex;
@@ -350,11 +449,33 @@
         </div>
       </article>
 
-      <!-- Item 03 -->
+      <!-- Item 03 (Carrossel) -->
       <article class="showcase-row">
         <div class="art-frame">
-          <img src="assets/aatan/aatan-03.png" alt="Arte de Adoção AATAN 03" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-          <div class="placeholder-art" style="display:none;">[Insira aqui a Arte 03 — ex: assets/aatan-03.jpg]</div>
+          <div class="carousel-wrapper" id="carrossel-aatan">
+            <div class="carousel-track">
+              <!-- Lâmina 1 -->
+              <div class="carousel-slide">
+                <img src="assets/aatan/aatan-03.png" alt="Carrossel Educativo AATAN — Lâmina 01" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="placeholder-art" style="display:none;">[Carrossel Lâmina 01 — ex: assets/aatan/aatan-03.png]</div>
+              </div>
+              <!-- Lâmina 2 -->
+              <div class="carousel-slide">
+                <img src="assets/aatan/aatan-03-2.png" alt="Carrossel Educativo AATAN — Lâmina 02" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="placeholder-art" style="display:none;">[Carrossel Lâmina 02 — ex: assets/aatan/aatan-03-2.png]</div>
+              </div>
+              <!-- Lâmina 3 -->
+              <div class="carousel-slide">
+                <img src="assets/aatan/aatan-03-3.png" alt="Carrossel Educativo AATAN — Lâmina 03" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="placeholder-art" style="display:none;">[Carrossel Lâmina 03 — ex: assets/aatan/aatan-03-3.png]</div>
+              </div>
+              <!-- Para adicionar mais lâminas, basta duplicar um bloco <div class="carousel-slide">...</div> -->
+            </div>
+
+            <button class="carousel-btn prev" type="button" aria-label="Imagem anterior">&#8592;</button>
+            <button class="carousel-btn next" type="button" aria-label="Próxima imagem">&#8594;</button>
+            <div class="carousel-dots" aria-label="Indicadores do carrossel"></div>
+          </div>
         </div>
         <div class="art-caption">
           <span class="caption-index">03 — Conscientização</span>
@@ -372,5 +493,55 @@
     <a href="index.html">Ver todos os projetos ↗</a>
   </footer>
 
+
+  <script>
+    (function () {
+      const wrapper = document.getElementById('carrossel-aatan');
+      if (!wrapper) return;
+
+      const track = wrapper.querySelector('.carousel-track');
+      const slides = Array.from(wrapper.querySelectorAll('.carousel-slide'));
+      const prevBtn = wrapper.querySelector('.prev');
+      const nextBtn = wrapper.querySelector('.next');
+      const dotsContainer = wrapper.querySelector('.carousel-dots');
+
+      let currentIndex = 0;
+
+      slides.forEach((_, idx) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'carousel-dot' + (idx === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Ir para lâmina ' + (idx + 1));
+        dot.addEventListener('click', () => goToSlide(idx));
+        dotsContainer.appendChild(dot);
+      });
+
+      const dots = Array.from(dotsContainer.querySelectorAll('.carousel-dot'));
+
+      function updateDots(index) {
+        currentIndex = index;
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+      }
+
+      function goToSlide(index) {
+        const target = (index + slides.length) % slides.length;
+        track.scrollTo({
+          left: target * track.clientWidth,
+          behavior: 'smooth'
+        });
+        updateDots(target);
+      }
+
+      prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+      nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+      track.addEventListener('scroll', () => {
+        const idx = Math.round(track.scrollLeft / track.clientWidth);
+        if (idx !== currentIndex && idx >= 0 && idx < slides.length) {
+          updateDots(idx);
+        }
+      }, { passive: true });
+    })();
+  </script>
 </body>
 </html>
