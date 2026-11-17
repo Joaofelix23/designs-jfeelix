@@ -165,9 +165,10 @@
     }
 
     /* Container uniforme da arte (proporção fixa 4:5 ou 1:1 para manter todas idênticas) */
-    .art-frame {
+   .art-frame {
       width: 100%;
-      aspect-ratio: 4 / 3;
+      max-width: 520px; /* Evita que a imagem vertical fique gigante na tela */
+      aspect-ratio: 4 / 5; /* Proporção vertical padrão do Instagram */
       background-color: var(--bg-surface);
       border-radius: 16px;
       overflow: hidden;
@@ -176,16 +177,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin: 0 auto; /* Centraliza a moldura na coluna esquerda */
     }
 
     .art-frame img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain; /* Garante 100% da imagem visível, sem nenhum corte */
       display: block;
       transition: transform 0.4s ease;
     }
-
     .showcase-row:hover .art-frame img {
       transform: scale(1.02);
     }
